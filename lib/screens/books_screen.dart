@@ -4,21 +4,34 @@ import "../services/book_service.dart";
 import "../db/app_db.dart";
 
 class BooksScreen extends StatefulWidget {
-  const BooksScreen({super.key});
+  final String? initialCategory;
+
+  const BooksScreen({
+    super.key,
+    this.initialCategory,
+  });
 
   @override
   State<BooksScreen> createState() => _BooksScreenState();
 }
 
 class _BooksScreenState extends State<BooksScreen> {
-  final categories = const ["Stoicism", "Buddhism", "Plato", "Ethics", "Existentialism"];
-  String selected = "Stoicism";
+  final categories = const [
+    "Stoicism",
+    "Buddhism",
+    "Plato",
+    "Ethics",
+    "Existentialism"
+  ];
+
+  late String selected;
   bool loading = false;
   List books = [];
 
   @override
   void initState() {
     super.initState();
+    selected = widget.initialCategory ?? "Stoicism";
     _load();
   }
 
@@ -62,7 +75,10 @@ class _BooksScreenState extends State<BooksScreen> {
                   child: DropdownButton<String>(
                     value: selected,
                     isExpanded: true,
-                    items: categories.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
+                    items: categories
+                        .map((c) =>
+                            DropdownMenuItem(value: c, child: Text(c)))
+                        .toList(),
                     onChanged: (v) {
                       if (v == null) return;
                       setState(() => selected = v);
@@ -96,7 +112,8 @@ class _BooksScreenState extends State<BooksScreen> {
                         title: Text(b.title),
                         subtitle: Text(b.authors),
                         trailing: IconButton(
-                          icon: Icon(fav ? Icons.favorite : Icons.favorite_border),
+                          icon: Icon(
+                              fav ? Icons.favorite : Icons.favorite_border),
                           onPressed: () => _toggleFav(b),
                         ),
                       );

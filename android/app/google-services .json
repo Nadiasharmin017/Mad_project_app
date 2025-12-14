@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "734010285466",
+    "project_id": "philosophy-app-481217",
+    "storage_bucket": "philosophy-app-481217.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734010285466:android:946ff2493a17c8b0b1ee23",
+        "android_client_info": {
+          "package_name": "com.philosophy.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABJqS35PwUbSctUSSw0tq8Qd2oiN4XrZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,13 +3,24 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'services/notification_service.dart';
 import 'services/quote_service.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'screens/home_screen.dart';
+import 'core/theme.dart';
+import 'screens/start_screen.dart';
+
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Firebase ONLY on supported platforms
+  if (Platform.isAndroid || Platform.isIOS) {
+  await Firebase.initializeApp();
+}
+
+
   await NotificationService.instance.init();
 
-  // 🔴 Schedule notifications ONLY on Android / iOS
   if (Platform.isAndroid || Platform.isIOS) {
     final q = await QuoteService().getTodayQuote();
     await NotificationService.instance.scheduleDailyAt(
@@ -28,20 +39,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Philosophy App',
-      theme: ThemeData(
-  useMaterial3: true,
-  scaffoldBackgroundColor: const Color(0xFFF5F3EF),
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color.fromARGB(255, 58, 105, 150),
-  ),
-  textTheme: const TextTheme(
-    bodyMedium: TextStyle(color: Color.fromARGB(255, 62, 62, 62)),
-  ),
-),
+   return MaterialApp(
+  debugShowCheckedModeBanner: false,
+  title: 'Philosophy App',
+  theme: appTheme(),
+  home: StartScreen(),
 
-      home: const HomeScreen(),
-    );
+);
   }
 }
