@@ -1,0 +1,20 @@
+[
+  {
+    "id": "lyceum",
+    "title": "Aristotle’s Lyceum",
+    "wikiTitle": "Lyceum (Classical)",
+    "placeQuery": "Lyceum of Aristotle, Athens"
+  },
+  {
+    "id": "nalanda",
+    "title": "Nalanda University",
+    "wikiTitle": "Nalanda",
+    "placeQuery": "Nalanda University"
+  },
+  {
+    "id": "confucius_temple",
+    "title": "Confucius Temple (Qufu)",
+    "wikiTitle": "Temple of Confucius",
+    "placeQuery": "Temple of Confucius Qufu"
+  }
+]
