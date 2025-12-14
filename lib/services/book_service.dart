@@ -2,7 +2,7 @@ import "dart:convert";
 import "package:http/http.dart" as http;
 import "../app_config.dart";
 import "../models/book.dart";
-
+//fetch books based on journal
 class BookService {
   Future<List<Book>> searchByCategory(String category) async {
     final q = Uri.encodeQueryComponent(category);

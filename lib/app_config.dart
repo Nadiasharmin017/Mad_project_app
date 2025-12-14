@@ -1,5 +1,5 @@
 class AppConfig {
-  static const String googleApiKey = "PUT_YOUR_GOOGLE_API_KEY_HERE";
+  static const String googleApiKey = "AIzaSyD5Y_z80hoigLPmaj30JSmZcmH7RV6Rf-Y";
 
   static const String zenQuotesUrl = "https://zenquotes.io/api/today";
   static const String googleBooksBase = "https://www.googleapis.com/books/v1/volumes";
