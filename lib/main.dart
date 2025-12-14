@@ -31,9 +31,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Philosophy App',
       theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.indigo,
-      ),
+  useMaterial3: true,
+  scaffoldBackgroundColor: const Color(0xFFF5F3EF),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: const Color.fromARGB(255, 58, 105, 150),
+  ),
+  textTheme: const TextTheme(
+    bodyMedium: TextStyle(color: Color.fromARGB(255, 62, 62, 62)),
+  ),
+),
+
       home: const HomeScreen(),
     );
   }
