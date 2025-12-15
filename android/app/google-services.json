@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "734010285466",
+    "project_id": "philosophy-app-481217",
+    "storage_bucket": "philosophy-app-481217.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734010285466:android:7c266af52971cf60b1ee23",
+        "android_client_info": {
+          "package_name": "com.example.philoshophy_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734010285466-0fh5o8s95e74ma3knamv3nilfbua7f47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABJqS35PwUbSctUSSw0tq8Qd2oiN4XrZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734010285466-0fh5o8s95e74ma3knamv3nilfbua7f47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734010285466:android:946ff2493a17c8b0b1ee23",
+        "android_client_info": {
+          "package_name": "com.philosophy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734010285466-0fh5o8s95e74ma3knamv3nilfbua7f47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABJqS35PwUbSctUSSw0tq8Qd2oiN4XrZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734010285466-0fh5o8s95e74ma3knamv3nilfbua7f47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

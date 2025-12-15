@@ -1,56 +1,61 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../services/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final email = TextEditingController();
-  final pass = TextEditingController();
-  final name = TextEditingController();
-  String? err;
+  final emailCtrl = TextEditingController();
+  final passCtrl = TextEditingController();
+  bool loading = false;
 
   Future<void> register() async {
-    setState(() => err = null);
+    setState(() => loading = true);
+
     try {
-      final cred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.text.trim(),
-        password: pass.text.trim(),
+      await AuthService.instance.register(
+        emailCtrl.text.trim(),
+        passCtrl.text.trim(),
       );
-      await FirebaseFirestore.instance.collection('users').doc(cred.user!.uid).set({
-        "name": name.text.trim(),
-        "email": email.text.trim(),
-        "createdAt": FieldValue.serverTimestamp(),
-      });
-      if (mounted) Navigator.pop(context);
+      Navigator.pop(context);
     } catch (e) {
-      setState(() => err = e.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Registration failed')),
+      );
     }
+
+    setState(() => loading = false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Register")),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 420),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              TextField(controller: name, decoration: const InputDecoration(labelText: "Name")),
-              TextField(controller: email, decoration: const InputDecoration(labelText: "Email")),
-              TextField(controller: pass, decoration: const InputDecoration(labelText: "Password"), obscureText: true),
-              const SizedBox(height: 12),
-              if (err != null) Text(err!, style: const TextStyle(color: Colors.red)),
-              const SizedBox(height: 12),
-              ElevatedButton(onPressed: register, child: const Text("Create account")),
-            ]),
-          ),
+      appBar: AppBar(title: const Text('Register')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: emailCtrl,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
+            TextField(
+              controller: passCtrl,
+              decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: loading ? null : register,
+              child: loading
+                  ? const CircularProgressIndicator()
+                  : const Text('Register'),
+            ),
+          ],
         ),
       ),
     );

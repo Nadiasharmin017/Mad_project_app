@@ -31,7 +31,7 @@ class AuthorsTab extends StatelessWidget {
           child: Text(
             authors[i],
             style: const TextStyle(
-              color: AppColors.textPrimary,
+              
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,

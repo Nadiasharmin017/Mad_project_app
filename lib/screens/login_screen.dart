@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../ui/home_shell.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -9,25 +13,34 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailCtrl = TextEditingController();
-  final passCtrl = TextEditingController();
-  bool loading = false;
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  bool _loading = false;
 
-  Future<void> login() async {
-    setState(() => loading = true);
+  Future<void> _login() async {
+    setState(() => _loading = true);
+
+    // ✅ Linux: fake login → enter app
+    if (Platform.isLinux) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => HomeShell()),
+      );
+      return;
+    }
 
     try {
-      await AuthService.instance.login(
-        emailCtrl.text.trim(),
-        passCtrl.text.trim(),
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _email.text.trim(),
+        password: _password.text.trim(),
       );
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login failed')),
+        SnackBar(content: Text(e.message ?? 'Login failed')),
       );
     }
 
-    setState(() => loading = false);
+    setState(() => _loading = false);
   }
 
   @override
@@ -37,20 +50,22 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: emailCtrl,
+              controller: _email,
               decoration: const InputDecoration(labelText: 'Email'),
             ),
+            const SizedBox(height: 12),
             TextField(
-              controller: passCtrl,
+              controller: _password,
               decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: loading ? null : login,
-              child: loading
+              onPressed: _loading ? null : _login,
+              child: _loading
                   ? const CircularProgressIndicator()
                   : const Text('Login'),
             ),
